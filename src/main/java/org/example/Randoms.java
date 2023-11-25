@@ -1,28 +1,27 @@
 package org.example;
 
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Randoms implements Iterable<Integer> {
-    protected int min, max;
-    private Iterator<Integer> intIterator;
+    private final Random random;
+    int min, max;
 
     public Randoms(int min, int max) {
-        intIterator = new Random().ints(min,max+1).iterator();
+        random = new Random();
+        random.ints(min, max + 1);
         this.min = min;
         this.max = max;
     }
 
     @Override
     public Iterator<Integer> iterator() {
-        return new Iterator<>(){
-
+        Iterator<Integer> it = new Iterator<Integer>() {
+            int index = 0;
 
             @Override
             public boolean hasNext() {
@@ -31,11 +30,13 @@ public class Randoms implements Iterable<Integer> {
 
             @Override
             public Integer next() {
-                if (hasNext()){
-                    return intIterator.next();
-                }
-                return null;
+                int next = random.nextInt(min, max + 1);
+                return next;
             }
+
+
         };
+        return it;
     }
 }
+
