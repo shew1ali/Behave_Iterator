@@ -13,7 +13,6 @@ public class Randoms implements Iterable<Integer> {
 
     public Randoms(int min, int max) {
         random = new Random();
-        random.ints(min, max + 1);
         this.min = min;
         this.max = max;
     }
@@ -21,7 +20,6 @@ public class Randoms implements Iterable<Integer> {
     @Override
     public Iterator<Integer> iterator() {
         Iterator<Integer> it = new Iterator<Integer>() {
-            int index = 0;
 
             @Override
             public boolean hasNext() {
